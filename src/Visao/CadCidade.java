@@ -1,8 +1,11 @@
 package Visao;
 
 import Controle.ControleCidade;
+import Controle.ControleUF;
+import Ferramentas.PreencherJtableGenerico;
 import Ferramentas.Rotinas;
 import Modelo.ModeloCidade;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,14 +15,24 @@ public class CadCidade extends javax.swing.JFrame {
 
     private ControleCidade controlcidade = new ControleCidade();
     private ModeloCidade modelcidade = new ModeloCidade();
+    private ControleUF controluf = new ControleUF();
+    private PreencherJtableGenerico listar = new PreencherJtableGenerico();
     private int estado;
+    private String[] iduf = null;
 
     /**
      * Creates new form CadCidade
      */
     public CadCidade() {
         initComponents();
+        estadobotoes(0);
 
+        iduf = listar.preencherComboStr(jComboBoxEstado, controluf.consultgeral(), iduf, "ds_uf", "id_uf");
+
+        listar.FormatarJTable(jTbConsulta, new int[]{10, 10, 10});
+        listar.PreencherJtableGenerico(jTbConsulta,
+                new String[]{"id_cidade", "ds_cidade", "id_uf"},
+                controlcidade.consultageral());
     }
 
     /**
@@ -48,9 +61,12 @@ public class CadCidade extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTbConsulta = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cidades");
+        setResizable(false);
 
         jPanel2.setBackground(java.awt.SystemColor.controlShadow);
 
@@ -87,6 +103,11 @@ public class CadCidade extends javax.swing.JFrame {
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/AlterarFT.png"))); // NOI18N
         jBtnAlterar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnAlterar.setSelected(true);
+        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarActionPerformed(evt);
+            }
+        });
 
         jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SalvarFT.png"))); // NOI18N
         jBtnSalvar.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -104,22 +125,28 @@ public class CadCidade extends javax.swing.JFrame {
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CancelarFT.png"))); // NOI18N
         jBtnCancelar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnCancelar.setSelected(true);
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(jBtnNovo)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnAlterar)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnSalvar)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnExcluir)
-                .addGap(10, 10, 10)
-                .addComponent(jBtnCancelar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnCancelar)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,6 +168,15 @@ public class CadCidade extends javax.swing.JFrame {
         });
 
         jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEstado.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxEstadoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -149,6 +185,32 @@ public class CadCidade extends javax.swing.JFrame {
         jLabel3.setText("UF");
 
         jLabel4.setText("Estado");
+
+        jTbConsulta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Cidade", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTbConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbConsultaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTbConsulta);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,6 +223,11 @@ public class CadCidade extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -168,19 +235,11 @@ public class CadCidade extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(jLabel4)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +247,9 @@ public class CadCidade extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(2, 2, 2)
                 .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +257,7 @@ public class CadCidade extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(2, 2, 2)
                 .addComponent(jTextCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
@@ -204,21 +265,22 @@ public class CadCidade extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(388, 398));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCodigoActionPerformed
@@ -226,14 +288,61 @@ public class CadCidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextCodigoActionPerformed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
-        
+        estado = Rotinas.INCLUIR;
+        estadobotoes(1);
+        jTextCodigo.setText("");
+        jTextCidade.setText("");
+        jTextUF.setText("");
+        jTextCidade.grabFocus();
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        setcomp();
-        controlcidade.incluir(modelcidade);
+        if (jTextCidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite o nome da Cidade! ");
+            jTextCidade.grabFocus();
+            return;
+        } else if (jTextUF.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Selecione um Estado! ");
+            jTextCidade.grabFocus();
+            return;
+        } else {
+            setcomp();
+            if(estado == Rotinas.INCLUIR){
+                controlcidade.incluir(modelcidade);
+            }else if(estado == Rotinas.ALTERAR)
+                controlcidade.alterar(modelcidade);
+        }
+
         getcomp();
+        
+        atualizaJtable();
+        
+        estadobotoes(0);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
+
+    private void jComboBoxEstadoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxEstadoPopupMenuWillBecomeInvisible
+        int linha = jComboBoxEstado.getSelectedIndex();
+        jTextUF.setText(iduf[linha]);
+    }//GEN-LAST:event_jComboBoxEstadoPopupMenuWillBecomeInvisible
+
+    private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
+        if (evt.getClickCount() == 2) {
+            int linha = jTbConsulta.getSelectedRow();
+            String codigo = (String) jTbConsulta.getValueAt(linha, 0);
+            modelcidade.setId_cidade(Integer.parseInt(codigo));
+            controlcidade.retornadados(modelcidade);
+            getcomp();
+        }
+    }//GEN-LAST:event_jTbConsultaMouseClicked
+
+    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        estado = Rotinas.ALTERAR;
+        estadobotoes(1);
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        estadobotoes(0);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,10 +394,28 @@ public class CadCidade extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTbConsulta;
     private javax.swing.JTextField jTextCidade;
     private javax.swing.JTextField jTextCodigo;
     private javax.swing.JTextField jTextUF;
     // End of variables declaration//GEN-END:variables
+
+    public void estadobotoes(int situacao) {
+        if (situacao == 0) {
+            jBtnNovo.setEnabled(true);
+            jBtnAlterar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+            jBtnSalvar.setEnabled(false);
+            jBtnCancelar.setEnabled(false);
+        } else {
+            jBtnNovo.setEnabled(false);
+            jBtnAlterar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnSalvar.setEnabled(true);
+            jBtnCancelar.setEnabled(true);
+        }
+    }
 
     public void setcomp() {
         if (estado == Rotinas.ALTERAR) {
@@ -302,6 +429,13 @@ public class CadCidade extends javax.swing.JFrame {
         jTextCodigo.setText(Integer.toString(modelcidade.getId_cidade()));
         jTextCidade.setText(modelcidade.getDs_cidade());
         jTextUF.setText(modelcidade.getId_uf());
+    }
+    
+    public void atualizaJtable(){
+        listar.FormatarJTable(jTbConsulta, new int[]{10, 10, 10});
+        listar.PreencherJtableGenerico(jTbConsulta,
+                new String[]{"id_cidade", "ds_cidade", "id_uf"},
+                controlcidade.consultageral());
     }
 
 }
