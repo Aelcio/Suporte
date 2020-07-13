@@ -4,9 +4,9 @@ package Modelo;
  *
  * @author Maru
  */
-public class ModeloCliente {
+public class ModeloPessoa {
 
-    public int id_cliente;
+    public int id_pessoa;
     public String nome;
     public int id_cidade;
     public String telefone;
@@ -16,12 +16,12 @@ public class ModeloCliente {
     public String usuario_sci;
     public String senha_sci;
 
-    public int getId_cliente() {
-        return id_cliente;
+    public int getId_pessoa() {
+        return id_pessoa;
     }
 
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
     }
 
     public String getNome() {
