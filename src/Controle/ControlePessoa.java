@@ -28,7 +28,7 @@ public class ControlePessoa extends ConexaoPostgres {
         return super.resultset;
     }
 
-    private void incluir(ModeloPessoa pessoa) {
+    public void incluir(ModeloPessoa pessoa) {
         pessoa.setId_pessoa(super.ultimasequencia("pessoa", "id_pessoa"));
         sql.delete(0, sql.length());
         sql.append("INSERT INTO PESSOA (");
@@ -40,8 +40,8 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append("email,");
         sql.append("cod_sci,");
         sql.append("usuario_sci,");
-        sql.append("senha _sci");
-        sql.append("(VALUES(");
+        sql.append("senha_sci");
+        sql.append(")VALUES(");
         sql.append(pessoa.getId_pessoa()).append(",'");
         sql.append(pessoa.getNome()).append("',");
         sql.append(pessoa.getId_cidade()).append(",'");
