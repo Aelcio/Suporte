@@ -15,6 +15,10 @@ public class ModeloPessoa {
     public int cod_sci;
     public String usuario_sci;
     public String senha_sci;
+    public String endereco;
+    public String numero;
+    public String bairro;
+    public String cep;
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -87,4 +91,38 @@ public class ModeloPessoa {
     public void setSenha_sci(String senha_sci) {
         this.senha_sci = senha_sci;
     }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    
+    
 }

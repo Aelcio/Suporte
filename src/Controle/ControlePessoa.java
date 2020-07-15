@@ -40,7 +40,11 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append("email,");
         sql.append("cod_sci,");
         sql.append("usuario_sci,");
-        sql.append("senha_sci");
+        sql.append("senha_sci,");
+        sql.append("endereco,");
+        sql.append("numero,");
+        sql.append("bairro,");
+        sql.append("CEP");
         sql.append(")VALUES(");
         sql.append(pessoa.getId_pessoa()).append(",'");
         sql.append(pessoa.getNome()).append("',");
@@ -50,10 +54,11 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append(pessoa.getEmail()).append("',");
         sql.append(pessoa.getCod_sci()).append(",'");
         sql.append(pessoa.getUsuario_sci()).append("','");
-        sql.append(pessoa.getSenha_sci()).append("')");
+        sql.append(pessoa.getSenha_sci()).append("','");
+        sql.append(pessoa.getEndereco()).append("','");
+        sql.append(pessoa.getNumero()).append("','");
+        sql.append(pessoa.getBairro()).append("','");
+        sql.append(pessoa.getCep()).append("')");
         super.atualizarSQL(sql.toString());
-        
-        
-
     }
 }
