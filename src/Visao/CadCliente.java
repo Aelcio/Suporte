@@ -20,8 +20,8 @@ import Modelo.ModeloPessoa;
 public class CadCliente extends javax.swing.JFrame {
 
     ControlePessoa controlpessoa = new ControlePessoa();
-    ControlePF controlepf = new ControlePF();
-    ControlePJ controlepj = new ControlePJ();
+    ControlePF controlpf = new ControlePF();
+    ControlePJ controlpj = new ControlePJ();
 
     ModeloPessoa modpessoa = new ModeloPessoa();
     ModeloPF modpf = new ModeloPF();
@@ -620,7 +620,7 @@ public class CadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextSenhaSCIActionPerformed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
-       estadobotoes(1);
+        estadobotoes(1);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -632,6 +632,15 @@ public class CadCliente extends javax.swing.JFrame {
         setcompcliente();
         controlpessoa.incluir(modpessoa);
         getcompcliente();
+        
+        setcomp_pf_pj();
+
+        if (jRbPF.isSelected()) {
+            controlpf.incluir(modpf);
+        } else if (jRbPJ.isSelected()) {
+            controlpj.incluir(modpj);
+        }
+        getcomp_pf_pj();
         estadobotoes(0);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
@@ -759,6 +768,15 @@ public class CadCliente extends javax.swing.JFrame {
 
     }
 
+    public void setcomp_pf_pj() {
+        modpf.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+        modpj.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+        modpf.setCpf(jTextCPF.getText());
+        modpf.setCpf(jTextCPF.getText());
+        modpj.setCnpj(jTextCNPJ.getText());
+        modpj.setRazao_social(jTextRazaoSocial.getText());
+    }
+
     public void getcompcliente() {
         jTextCodigo.setText(Integer.toString(modpessoa.getId_pessoa()));
         jTextNome.setText(modpessoa.getNome());
@@ -769,5 +787,11 @@ public class CadCliente extends javax.swing.JFrame {
         jTextCodSCI.setText(Integer.toString(modpessoa.getCod_sci()));
         jTextUserSCI.setText(modpessoa.getUsuario_sci());
         jTextSenhaSCI.setText(modpessoa.getSenha_sci());
+    }
+
+    public void getcomp_pf_pj() {
+        jTextCPF.setText(modpf.getCpf());
+        jTextCNPJ.setText(modpj.getCnpj());
+        jTextRazaoSocial.setText(modpj.getRazao_social());
     }
 }
