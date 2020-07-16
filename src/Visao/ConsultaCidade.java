@@ -1,14 +1,29 @@
 package Visao;
 
+import Controle.ControleCidade;
+import Ferramentas.PreencherJtableGenerico;
+
 /**
  *
  * @author Maru
  */
 public class ConsultaCidade extends javax.swing.JDialog {
-
+    
+    ControleCidade controlcidade = new ControleCidade();
+    PreencherJtableGenerico preencher = new PreencherJtableGenerico();
+    
+    public String codretorno = "";
+    public String cidaderetorno = "";
+    public String ufretorno = "";
+    
     /** Creates new form ConsultaCidade */
-    public ConsultaCidade() {
+    public ConsultaCidade(java.awt.Frame parent, boolean modal) {
         initComponents();
+        
+         preencher.FormatarJTable(jTConsulta, new int[]{10, 250, 10});
+        preencher.PreencherJtableGenerico(jTConsulta,
+                new String[]{"id_cidade", "ds_cidade", "id_uf"},
+                controlcidade.consultageral());
     }
 
     /** This method is called from within the constructor to
@@ -22,25 +37,31 @@ public class ConsultaCidade extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTConsulta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta de Cidades");
         setResizable(false);
 
         jPanel2.setBackground(java.awt.SystemColor.controlShadow);
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 37));
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("    Cidades");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 37, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(java.awt.SystemColor.inactiveCaption);
@@ -75,7 +96,7 @@ public class ConsultaCidade extends javax.swing.JDialog {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -94,7 +115,12 @@ public class ConsultaCidade extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTConsultaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTConsulta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,6 +144,17 @@ public class ConsultaCidade extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(416, 290));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTConsultaMouseClicked
+        int index = jTConsulta.getSelectedRow();
+        codretorno = (String) jTConsulta.getValueAt(index, 0);
+        cidaderetorno = (String) jTConsulta.getValueAt(index, 1);
+        ufretorno = (String) jTConsulta.getValueAt(index, 2);
+               
+        if(evt.getClickCount() == 2){
+            dispose();
+        }
+    }//GEN-LAST:event_jTConsultaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -149,17 +186,18 @@ public class ConsultaCidade extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaCidade().setVisible(true);
+                //new ConsultaCidade().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTConsulta;
     // End of variables declaration//GEN-END:variables
 
 }
