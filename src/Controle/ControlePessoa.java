@@ -14,17 +14,32 @@ public class ControlePessoa extends ConexaoPostgres {
 
     public ResultSet consultageral() {
         super.executeSQL("SELECT "
-                + "c.id_pessoa, "
-                + "c.nome,"
-                + "c.nome, "
-                + "c.telefone, "
-                + "c.celular, "
-                + "c.email, "
-                + "c.cod_sci, "
-                + "c.usuario_sci, "
-                + "c.senha_sci FROM pessoa as c "
+                + "cl.id_pessoa, "
+                + "cl.nome, "
+                + "pf.cpf, "
+                + "pj.cnpj, "
+                + "pj.razao_social,"
+                + "cl.endereco, "
+                + "cl.numero, "
+                + "cl.cep, "
+                + "cl.bairro, "
+                + "cd.ds_cidade, "
+                + "uf.id_uf, "
+                + "cl.telefone, "
+                + "cl.celular, "
+                + "cl.email, "
+                + "cl.cod_sci, "
+                + "cl.usuario_sci, "
+                + "cl.senha_sci "
+                + "FROM " 
+                + "pessoa as cl "
                 + "JOIN cidade as cd "
-                + "ON cd.id_cidade = c.id_cidade");
+                + "ON cd.id_cidade = cl.id_cidade "
+                + "JOIN uf ON uf.id_uf = cd.id_uf "
+                + "LEFT JOIN pessoa_fisica as pf "
+                + "ON pf.id_pessoa = cl.id_pessoa "
+                + "LEFT JOIN pessoa_juridica as pj "
+                + "ON pj.id_pessoa = cl.id_pessoa");
         return super.resultset;
     }
 
