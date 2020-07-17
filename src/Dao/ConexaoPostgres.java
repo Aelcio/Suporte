@@ -28,7 +28,7 @@ public class ConexaoPostgres {
         } else {
             try {
                 Class.forName("org.postgresql.Driver");
-                ConexaoPostgres = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Suporte", "postgres", "11092014");
+                ConexaoPostgres = DriverManager.getConnection("jdbc:postgresql://localhost:5432/suporte", "postgres", "11092014");
                 System.out.println("Conectado");
                 return ConexaoPostgres;
             } catch (ClassNotFoundException ex) {

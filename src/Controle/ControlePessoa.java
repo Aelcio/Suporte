@@ -14,15 +14,15 @@ public class ControlePessoa extends ConexaoPostgres {
 
     public ResultSet consultageral() {
         super.executeSQL("SELECT "
-                + "c.id_cliente, "
+                + "c.id_pessoa, "
                 + "c.nome,"
-                + "cd.nome, "
+                + "c.nome, "
                 + "c.telefone, "
                 + "c.celular, "
                 + "c.email, "
                 + "c.cod_sci, "
                 + "c.usuario_sci, "
-                + "c.senha_sci FROM cidade as c "
+                + "c.senha_sci FROM pessoa as c "
                 + "JOIN cidade as cd "
                 + "ON cd.id_cidade = c.id_cidade");
         return super.resultset;
