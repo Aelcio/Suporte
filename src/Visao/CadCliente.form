@@ -720,6 +720,9 @@
                 <Property name="autoResizeMode" type="int" value="0"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTbConsultaMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

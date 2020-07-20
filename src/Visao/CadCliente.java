@@ -28,10 +28,11 @@ public class CadCliente extends javax.swing.JFrame {
     ControlePJ controlpj = new ControlePJ();
 
     ModeloPessoa modpessoa = new ModeloPessoa();
+    ModeloCidade modcidade = new ModeloCidade();
     ModeloPF modpf = new ModeloPF();
     ModeloPJ modpj = new ModeloPJ();
     ControleCidade controlcidade = new ControleCidade();
-    
+
     LimparCampos limpar = new LimparCampos();
 
     PreencherJtableGenerico preencher = new PreencherJtableGenerico();
@@ -48,10 +49,12 @@ public class CadCliente extends javax.swing.JFrame {
         jTextCNPJ.setEnabled(false);
         jTextCPF.setEnabled(false);
         jTextRazaoSocial.setEnabled(false);
-        
-        preencher.FormatarJTable(jTbConsulta, new int[]{60, 200, 85, 150, 300,40,40,40,40,40,40,40,40,40,40});
+
+        preencher.FormatarJTable(jTbConsulta, new int[]{60, 200, 85, 110, 200, 200, 60, 60, 30, 80, 90, 200, 60, 100, 60});
         preencher.PreencherJtableGenerico(jTbConsulta,
-                new String[]{"id_pessoa", "nome", "cpf", "cnpj", "razao_social"},
+                new String[]{"id_pessoa", "nome", "cpf", "cnpj",
+                    "razao_social", "endereco", "numero", "cep",
+                    "id_uf", "telefone", "celular", "email", "cod_sci", "usuario_sci", "senha_sci"},
                 controlpessoa.consultageral());
 
     }
@@ -438,6 +441,11 @@ public class CadCliente extends javax.swing.JFrame {
         });
         jTbConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTbConsulta.setAutoscrolls(false);
+        jTbConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbConsultaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbConsulta);
 
         javax.swing.GroupLayout jPanelCadClienteLayout = new javax.swing.GroupLayout(jPanelCadCliente);
@@ -687,7 +695,7 @@ public class CadCliente extends javax.swing.JFrame {
         estadobotoes(1);
         jTextNome.grabFocus();
         limpar.limparcampos(jPanelCadCliente);
-        
+
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -728,17 +736,28 @@ public class CadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextUFActionPerformed
 
     private void jBtnConsultaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaCidadeActionPerformed
-                final ConsultaCidade cls = new ConsultaCidade(this , true);
+        final ConsultaCidade cls = new ConsultaCidade(this, true);
         cls.setVisible(true);
         cls.addWindowListener(new java.awt.event.WindowAdapter() {
-        
-        public void windowClosed(java.awt.event.WindowEvent evt) {
-            jTextCodCidade.setText(cls.codretorno);
-            jTextCidade.setText(cls.cidaderetorno);
-            jTextUF.setText(cls.ufretorno);
-        }
-    });
+
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jTextCodCidade.setText(cls.codretorno);
+                jTextCidade.setText(cls.cidaderetorno);
+                jTextUF.setText(cls.ufretorno);
+            }
+        });
     }//GEN-LAST:event_jBtnConsultaCidadeActionPerformed
+
+    private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
+        limpar.limparcampos(jPanelCadCliente);
+        if (evt.getClickCount() == 2) {
+            int linha = jTbConsulta.getSelectedRow();
+            String codigo = (String) jTbConsulta.getValueAt(linha, 0);
+            modpessoa.setId_pessoa(Integer.parseInt(codigo));
+            controlpessoa.retornadados(modpessoa, modcidade, modpf, modpj);
+            getcompcliente();
+        }
+    }//GEN-LAST:event_jTbConsultaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -875,7 +894,10 @@ public class CadCliente extends javax.swing.JFrame {
     public void getcompcliente() {
         jTextCodigo.setText(Integer.toString(modpessoa.getId_pessoa()));
         jTextNome.setText(modpessoa.getNome());
+        jTextCPF.setText(modpf.getCpf());
+        jTextCNPJ.setText(modpj.getCnpj());
         jTextCodCidade.setText(Integer.toString(modpessoa.getId_cidade()));
+        jTextCidade.setText(modcidade.getDs_cidade());
         jTextTelefone.setText(modpessoa.getTelefone());
         jTextCelular.setText(modpessoa.getCelular());
         jTextEmail.setText(modpessoa.getEmail());
@@ -886,6 +908,7 @@ public class CadCliente extends javax.swing.JFrame {
         jTextNumEnd.setText(modpessoa.getNumero());
         jTextBairro.setText(modpessoa.getBairro());
         jTextCEP.setText(modpessoa.getCep());
+        jTextUF.setText(modcidade.getId_uf());
     }
 
     public void getcomp_pf_pj() {

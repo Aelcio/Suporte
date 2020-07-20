@@ -1,8 +1,12 @@
 package Controle;
 
 import Dao.ConexaoPostgres;
+import Modelo.ModeloCidade;
+import Modelo.ModeloPF;
+import Modelo.ModeloPJ;
 import Modelo.ModeloPessoa;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -31,7 +35,7 @@ public class ControlePessoa extends ConexaoPostgres {
                 + "cl.cod_sci, "
                 + "cl.usuario_sci, "
                 + "cl.senha_sci "
-                + "FROM " 
+                + "FROM "
                 + "pessoa as cl "
                 + "JOIN cidade as cd "
                 + "ON cd.id_cidade = cl.id_cidade "
@@ -39,7 +43,8 @@ public class ControlePessoa extends ConexaoPostgres {
                 + "LEFT JOIN pessoa_fisica as pf "
                 + "ON pf.id_pessoa = cl.id_pessoa "
                 + "LEFT JOIN pessoa_juridica as pj "
-                + "ON pj.id_pessoa = cl.id_pessoa");
+                + "ON pj.id_pessoa = cl.id_pessoa "
+                + "ORDER BY cl.id_pessoa ASC");
         return super.resultset;
     }
 
@@ -75,5 +80,39 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append(pessoa.getBairro()).append("','");
         sql.append(pessoa.getCep()).append("')");
         super.atualizarSQL(sql.toString());
+    }
+
+    public void retornadados(ModeloPessoa pessoa, ModeloCidade cidade, ModeloPF pf, ModeloPJ pj) {
+        super.executeSQL("SELECT * FROM pessoa as p "
+                +"JOIN Cidade as cd "
+                + "ON cd.id_cidade = p.id_cidade "
+                + "LEFT JOIN pessoa_fisica as pf "
+                + "ON pf.id_pessoa = p.id_pessoa  "
+                + "LEFT JOIN pessoa_juridica as pj "
+                + "ON pj.id_pessoa = p.id_pessoa WHERE "
+                + "p.id_pessoa = " + pessoa.getId_pessoa());
+        try {
+            super.resultset.first();
+            pessoa.setId_pessoa(resultset.getInt("id_pessoa"));
+            pessoa.setNome(resultset.getString("nome"));
+            pf.setCpf(resultset.getString("cpf"));
+            pj.setCnpj(resultset.getString("cnpj"));
+            pessoa.setEndereco(resultset.getString("endereco"));
+            pessoa.setNumero(resultset.getString("numero"));
+            pessoa.setCep(resultset.getString("cep"));
+            pessoa.setBairro(resultset.getString("bairro"));
+            pessoa.setTelefone(resultset.getString("telefone"));
+            pessoa.setCelular(resultset.getString("celular"));
+            pessoa.setEmail(resultset.getString("email")); 
+            pessoa.setCod_sci((resultset.getInt("cod_sci")));
+            pessoa.setUsuario_sci(resultset.getString("usuario_sci"));
+            pessoa.setSenha_sci(resultset.getString("senha_sci"));
+            pessoa.setId_cidade(resultset.getInt("id_cidade"));
+            cidade.setDs_cidade(resultset.getString("ds_cidade"));
+            cidade.setId_uf(resultset.getString("id_uf"));
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }
