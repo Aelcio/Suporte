@@ -8,9 +8,11 @@ package Visao;
 import Controle.ControleAtendimento;
 import Controle.ControleSistema;
 import Ferramentas.PreencherJtableGenerico;
+import Ferramentas.RetornaDataAtual;
 import Modelo.ModeloAtendimento;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +23,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     PreencherJtableGenerico listar = new PreencherJtableGenerico();
     ControleSistema controlsistema = new ControleSistema();
     ControleAtendimento controlatendimento = new ControleAtendimento();
+    RetornaDataAtual retdata = new RetornaDataAtual();
 
     ModeloAtendimento modatendimento = new ModeloAtendimento();
 
@@ -345,6 +348,8 @@ public class CadAtendimentos extends javax.swing.JFrame {
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         estadobotoes(1);
+        jTextData.setText(retdata.dataatual());
+        
 
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
@@ -353,10 +358,14 @@ public class CadAtendimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
+        if(jTextCodCliente.getText().equals("") && jTextCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Informe um Cliente! ");
+        }else{
         setcomp();
         controlatendimento.incluir(modatendimento);
+        getcomp();
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-
+    }
     private void jBtnConsultaSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaSistemaActionPerformed
         final ConsultaSistema cs = new ConsultaSistema(this, true);
         cs.setVisible(true);
