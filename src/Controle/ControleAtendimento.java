@@ -2,6 +2,7 @@ package Controle;
 
 import Dao.ConexaoPostgres;
 import Modelo.ModeloAtendimento;
+import java.sql.ResultSet;
 
 /**
  *
@@ -11,7 +12,12 @@ public class ControleAtendimento extends ConexaoPostgres {
     
     StringBuilder sql = new StringBuilder();
     
-    public void incluir(ModeloAtendimento atendimento){
+    public ResultSet consultageral() {
+        super.executeSQL("SELECT * FROM atendimentos");
+        return super.resultset;
+    }
+    
+    public void incluir(ModeloAtendimento atendimento) {
         atendimento.setId_atendimento(super.ultimasequencia("atendimento", "id_atendimento"));
         sql.delete(0, sql.length());
         sql.append("INSERT INTO atendimento (");

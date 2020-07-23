@@ -364,6 +364,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
         setcomp();
         controlatendimento.incluir(modatendimento);
         getcomp();
+        estadobotoes(0);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
     }
     private void jBtnConsultaSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaSistemaActionPerformed
