@@ -488,7 +488,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     public void setcomp() {
         modatendimento.setId_pessoa(Integer.parseInt(jTextCodCliente.getText()));
         modatendimento.setData_suporte(jTextData.getText());
-        modatendimento.setSistema(jTextSistema.getText());
+        modatendimento.setId_sistema(Integer.parseInt(jTextSistema.getText()));
         modatendimento.setVersao(jTextVersao.getText());
         modatendimento.setFuncionario(jTextFuncionario.getText());
         modatendimento.setProblema(jTextProblema.getText());

@@ -23,5 +23,15 @@ public class ControlePF extends ConexaoPostgres {
         sql.append(pf.getCpf()).append("',");
         sql.append(pf.getId_pessoa()).append(")");
         super.atualizarSQL(sql.toString());        
-    }    
+    } 
+    
+    public void alterar(ModeloPF pf){
+     sql.delete(0, sql.length());
+        sql.append("UPDATE pessoa_fisica SET ");
+        sql.append("cpf = '").append(pf.getCpf()).append("', ");
+        sql.append("id_pessoa = '").append(pf.getId_pessoa()).append("' ");
+        sql.append("WHERE ");
+        sql.append("id_pf = ").append(pf.getId_pf());
+        super.atualizarSQL(sql.toString());
+    }
 }

@@ -26,4 +26,15 @@ public class ControlePJ extends ConexaoPostgres {
         sql.append(pj.getId_pessoa()).append(")");
         super.atualizarSQL(sql.toString());
     }
+    
+    public void alterar(ModeloPJ pj){
+     sql.delete(0, sql.length());
+        sql.append("UPDATE pessoa_juridica SET ");
+        sql.append("cnpj = '").append(pj.getCnpj()).append("', ");
+        sql.append("razao_social = '").append(pj.getRazao_social()).append("',");
+        sql.append("id_pessoa = ").append(pj.getId_pessoa()).append(" ");
+        sql.append("WHERE ");
+        sql.append("id_pj = ").append(pj.getId_pj());
+        super.atualizarSQL(sql.toString());
+    }
 }

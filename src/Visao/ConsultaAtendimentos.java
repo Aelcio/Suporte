@@ -5,17 +5,37 @@
  */
 package Visao;
 
+import Controle.ControleAtendimento;
+import Ferramentas.PreencherJtableGenerico;
+
 /**
  *
  * @author Maru
  */
 public class ConsultaAtendimentos extends javax.swing.JFrame {
 
+    private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
+    private ControleAtendimento controlatendimento = new ControleAtendimento();
+
     /**
      * Creates new form ConsultaAtendimentos
      */
     public ConsultaAtendimentos() {
         initComponents();
+
+        preencher.FormatarJTable(jTable2, new int[]{50, 60, 200,65,80,100,80,80,1000,1000});
+
+        preencher.PreencherJtableGenerico(jTable2, new String[]{"id_atendimento",
+            "id_pessoa",
+            "nome",
+            "data_suporte",
+            "id_sistema",
+            "ds_sistema",
+            "versao",
+            "funcionario",
+            "problema",
+            "solucao"},
+                controlatendimento.consultageral());
     }
 
     /**
@@ -38,15 +58,24 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código", "Cod. Cliente", "Cliente", "Data", "Cod. Sistema", "Sistema", "Versão", "Funcionário", "Problema", "Solução"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTable2);
 
         jPanel5.setBackground(java.awt.SystemColor.controlShadow);
@@ -131,7 +160,7 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("windows".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

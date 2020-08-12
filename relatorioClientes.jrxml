@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="652c9c30-829c-421d-b336-00bc8a605a8c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM Pessoa]]>
+	</queryString>
+	<field name="id_pessoa" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cod_sci" class="java.lang.Integer"/>
+	<field name="usuario_sci" class="java.lang.String"/>
+	<field name="senha_sci" class="java.lang.String"/>
+	<group name="id_pessoa">
+		<groupExpression><![CDATA[$F{id_pessoa}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="5e6bbadd-2d59-4b26-bcfa-cdd44cd373fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Delta Tecnilogia da Informação Ltda]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="f28410d3-3ff1-4d1f-982e-279a2d31b9ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Relatório Clientes SCI]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="2c8b0185-2fbf-478b-af74-3fb867909513"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="18cf23cb-3c6d-4381-9f5b-c8c8b132593b"/>
+				<text><![CDATA[id_pessoa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="fa0430aa-f2d7-4da1-a988-9712d5ce3dbc"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="cc7403a8-8fb7-46d4-aeb8-f849cf80ec0b"/>
+				<text><![CDATA[cod_sci]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="0069fba5-4d54-4424-a9c8-d279136e0473"/>
+				<text><![CDATA[usuario_sci]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="cc5eed9c-3af4-4b3d-b609-9653cf4d267a"/>
+				<text><![CDATA[senha_sci]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="15a7ce64-0ca1-48c3-8f21-6de40ff8fae2"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="7281fe5f-60c9-4877-8aef-74a139341073"/>
+				<textFieldExpression><![CDATA[$F{id_pessoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="d2a1d453-8197-425b-ac3b-e2a2b1b56ab8"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="850339e4-a323-44b5-953b-2fb470068b83"/>
+				<textFieldExpression><![CDATA[$F{cod_sci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="2f84f8ce-a823-40d5-805c-c1cf79bc4e58"/>
+				<textFieldExpression><![CDATA[$F{usuario_sci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="3e4eecac-bb1c-4c5c-822a-3f1d866458c7"/>
+				<textFieldExpression><![CDATA[$F{senha_sci}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

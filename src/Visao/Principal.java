@@ -5,6 +5,16 @@
  */
 package Visao;
 
+import Controle.ControlePessoa;
+import static groovy.sql.Sql.resultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Aelcio
@@ -14,9 +24,11 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    private ControlePessoa controlpessoa = new ControlePessoa();
+
     public Principal() {
         initComponents();
-        
+
         setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -29,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuCadCliente = new javax.swing.JMenuItem();
@@ -36,6 +49,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuSair = new javax.swing.JMenuItem();
         jMenuRegistros = new javax.swing.JMenu();
         jMenuAtendimento = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMRelClientes = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +91,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuRegistros);
 
+        jMenu2.setText("Relatórios");
+
+        jMRelClientes.setText("Clientes");
+        jMRelClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMRelClientesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMRelClientes);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,6 +130,19 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAtendimentoActionPerformed
         new CadAtendimentos().setVisible(true);
     }//GEN-LAST:event_jMenuAtendimentoActionPerformed
+
+    private void jMRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRelClientesActionPerformed
+        try {
+            JRResultSetDataSource resultset = new JRResultSetDataSource(controlpessoa.consultageral());
+            JasperPrint jpPrint = JasperFillManager.fillReport("Relatorios/RelClientes.jasper", new HashMap(), resultset);
+            JasperViewer jv = new JasperViewer(jpPrint , false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception ex) {    
+            JOptionPane.showMessageDialog(null, "Erro ao gerar relatório" + ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jMRelClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +180,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMRelClientes;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuAtendimento;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadCidade;

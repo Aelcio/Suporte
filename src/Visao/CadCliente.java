@@ -705,6 +705,8 @@ public class CadCliente extends javax.swing.JFrame {
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         setcompcliente();
+        if(estado == Rotinas.INCLUIR){
+                
         controlpessoa.incluir(modpessoa);
         getcompcliente();
 
@@ -715,10 +717,19 @@ public class CadCliente extends javax.swing.JFrame {
         } else if (jRbPJ.isSelected()) {
             controlpj.incluir(modpj);
         }
+        
+            }else if(estado == Rotinas.ALTERAR){
+                controlpessoa.alterar(modpessoa);
+                //if (jRbPF.isSelected()) {
+                    controlpf.alterar(modpf);
+                //} else if (jRbPJ.isSelected()) {
+                    controlpj.alterar(modpj);
+            }               
+        
         getcomp_pf_pj();
         estadobotoes(0);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-
+   // }
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -750,7 +761,7 @@ public class CadCliente extends javax.swing.JFrame {
 
     private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
         limpar.limparcampos(jPanelCadCliente);
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             int linha = jTbConsulta.getSelectedRow();
             String codigo = (String) jTbConsulta.getValueAt(linha, 0);
             modpessoa.setId_pessoa(Integer.parseInt(codigo));

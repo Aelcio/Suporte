@@ -11,7 +11,7 @@ public class ModeloAtendimento {
     private int id_atendimento;
     private int id_pessoa;
     private String data_suporte;
-    private String sistema;
+    private int id_sistema;
     private String versao;
     private String funcionario;
     private String problema;
@@ -41,14 +41,14 @@ public class ModeloAtendimento {
         this.data_suporte = data_suporte;
     }
 
-    public String getSistema() {
-        return sistema;
+    public int getId_sistema() {
+        return id_sistema;
     }
 
-    public void setSistema(String sistema) {
-        this.sistema = sistema;
+    public void setId_sistema(int id_sistema) {
+        this.id_sistema = id_sistema;
     }
-
+   
     public String getVersao() {
         return versao;
     }

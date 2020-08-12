@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0866843a-acfc-4407-9ab8-22df5a3c1002">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[Select * from pessoa]]>
+	</queryString>
+	<field name="id_pessoa" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cod_sci" class="java.lang.Integer"/>
+	<field name="usuario_sci" class="java.lang.String"/>
+	<field name="senha_sci" class="java.lang.String"/>
+	<group name="id_pessoa">
+		<groupExpression><![CDATA[$F{id_pessoa}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="9db42e46-e55f-4892-b85e-32412ce3eab8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delta Tecnologia da Informação	]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="aa47d3aa-d4ae-4017-8d3a-233cfc451f78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Clientes]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="38198c34-f9bc-4f01-a246-d97c6a3fcf6e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="0" width="258" height="20" uuid="03c20949-778c-4a81-aa25-308f23c9d2a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="61" height="20" uuid="2db4fd67-9bb9-40fe-880f-00b083841250"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código SCI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="0" width="131" height="20" uuid="7acdfc54-ad66-492f-8ec0-c020511be0d1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuário SCI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="92" height="20" uuid="d83fb301-a22b-4545-853f-b075a919ba73"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Senha SCI]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="269" height="20" uuid="0a156a77-351d-429a-b590-265b69ed1350"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="61" height="20" uuid="811c8cca-55d8-45c9-8a62-a976a2fa4767"/>
+				<textFieldExpression><![CDATA[$F{cod_sci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="0" width="131" height="20" uuid="720c7692-4c61-4bdb-b8f1-5dd5b10873b3"/>
+				<textFieldExpression><![CDATA[$F{usuario_sci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="20" uuid="36626d7d-5d94-4958-a317-9b689ef17361"/>
+				<textFieldExpression><![CDATA[$F{senha_sci}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="422" y="23" width="133" height="19" uuid="592f8503-a385-42b7-a574-a14197c8b095"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Aelcio Soares Rodrigues de Macedo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="555" height="1" uuid="469c5208-d934-415d-9b36-913f15c79762"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -81,6 +81,25 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append(pessoa.getCep()).append("')");
         super.atualizarSQL(sql.toString());
     }
+    
+    public void alterar(ModeloPessoa pessoa){
+     sql.delete(0, sql.length());
+        sql.append("UPDATE pessoa SET ");
+        sql.append("nome = '").append(pessoa.getNome()).append("',");
+        sql.append("id_cidade = ").append(pessoa.getId_cidade()).append(",");
+        sql.append("telefone = '").append(pessoa.getTelefone()).append("',");
+        sql.append("celular = '").append(pessoa.getCelular()).append("',");
+        sql.append("email = '").append(pessoa.getEmail()).append("',");
+        sql.append("cod_sci = ").append(pessoa.getCod_sci()).append(",");
+        sql.append("usuario_sci = '").append(pessoa.getUsuario_sci()).append("',");
+        sql.append("endereco = '").append(pessoa.getEndereco()).append("',");
+        sql.append("numero = '").append(pessoa.getNumero()).append("',");
+        sql.append("bairro = '").append(pessoa.getBairro()).append("',");
+        sql.append("cep = '").append(pessoa.getCep()).append("'");
+        sql.append("WHERE ");
+        sql.append("id_pessoa = ").append(pessoa.getId_pessoa());
+        super.atualizarSQL(sql.toString());
+    }
 
     public void retornadados(ModeloPessoa pessoa, ModeloCidade cidade, ModeloPF pf, ModeloPJ pj) {
         super.executeSQL("SELECT * FROM pessoa as p "
