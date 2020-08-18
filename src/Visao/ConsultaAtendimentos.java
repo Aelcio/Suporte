@@ -7,6 +7,7 @@ package Visao;
 
 import Controle.ControleAtendimento;
 import Ferramentas.PreencherJtableGenerico;
+import Modelo.ModeloAtendimento;
 import Modelo.ModeloPessoa;
 
 /**
@@ -18,6 +19,7 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
     private ControleAtendimento controlatendimento = new ControleAtendimento();
     ModeloPessoa modpessoa = new ModeloPessoa();
+    ModeloAtendimento modatendimento = new ModeloAtendimento();
 
     /**
      * Creates new form ConsultaAtendimentos
@@ -38,28 +40,6 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
             "problema",
             "solucao"},
                 controlatendimento.consultageral());
-    }
-
-    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
-
-        switch (jCbTipo.getSelectedIndex()) {
-            case 0: {
-                modpessoa.setNome(jTextConsulta.getText());
-                preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
-                    "id_pessoa",
-                    "nome",
-                    "data_suporte",
-                    "id_sistema",
-                    "ds_sistema",
-                    "versao",
-                    "funcionario",
-                    "problema",
-                    "solucao"},
-                        controlatendimento.consultacliente(modpessoa));
-                break;
-            }
-        }
     }
 
     /**
@@ -155,6 +135,11 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         jBtnConsultaAtendimentos1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jBtnBuscar.setText("Buscar");
+        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tipo de busca");
 
@@ -247,6 +232,28 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
     private void jBtnConsultaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaAtendimentosActionPerformed
         new ConsultaAtendimentos().setVisible(true);
     }//GEN-LAST:event_jBtnConsultaAtendimentosActionPerformed
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
+        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
+
+        switch (jCbTipo.getSelectedIndex()) {
+            case 0: {
+                modpessoa.setNome(jTextConsulta.getText());
+                preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
+                    "id_pessoa",
+                    "nome",
+                    "data_suporte",
+                    "id_sistema",
+                    "ds_sistema",
+                    "versao",
+                    "funcionario",
+                    "problema",
+                    "solucao"},
+                        controlatendimento.consultacliente(modatendimento, modpessoa));
+                break;
+            }
+        }
+    }//GEN-LAST:event_jBtnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

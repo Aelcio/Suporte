@@ -32,24 +32,24 @@ public class ControleAtendimento extends ConexaoPostgres {
         return super.resultset;
     }   
     
-    public ResultSet consultacliente(ModeloPessoa pessoa){
+    public ResultSet consultacliente(ModeloAtendimento atendimento, ModeloPessoa pessoa){
         super.executeSQL("SELECT at.id_atendimento,"
-                + "c.id_pessoa,"
-                + "c.nome,"
-                + "at.data_suporte,"
-                + "s.id_sistema,"
-                + "s.ds_sistema,"
-                + "at.versao,"
-                + "at.funcionario,"
-                + "at.problema,"
-                + "at.solucao,"
-                + "FROM atendimento as at,"
-                + "JOIN pessoa as c	"
-                + "ON c.id_pessoa = at.id_pessoa "
-                + "JOIN sistema as s"
+                + "p.id_pessoa, "
+                + "p.nome, "
+                + "at.data_suporte, "
+                + "s.id_sistema, "
+                + "s.ds_sistema, "
+                + "at.versao, "
+                + "at.funcionario, "
+                + "at.problema, "
+                + "at.solucao "
+                + "FROM atendimento as at "
+                + "JOIN pessoa as p "
+                + "ON p.id_pessoa = at.id_pessoa "
+                + "JOIN sistema as s "
                 + "ON s.id_sistema = at.id_sistema"
-                + "WHERE"
-                + "c.nome like '%"+pessoa.getNome()+"%'");
+                + "WHERE "
+                + "p.nome like '%Exatus%'");
         return super.resultset;
     }
     
