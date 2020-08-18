@@ -52,25 +52,29 @@
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel6" pref="558" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jScrollPane2" pref="760" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jCbTipo" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jTextConsulta" min="-2" pref="557" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jCbTipo" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jBtnBuscar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="533" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jTextConsulta" min="-2" pref="557" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jBtnBuscar" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" pref="760" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -207,13 +211,12 @@
         <Component class="javax.swing.JComboBox" name="jCbTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="Geral"/>
-                <StringItem index="1" value="Cliente"/>
-                <StringItem index="2" value="Sistema"/>
-                <StringItem index="3" value="Problema"/>
-                <StringItem index="4" value="Solu&#xe7;&#xe3;o"/>
-                <StringItem index="5" value="Funcion&#xe1;rio"/>
+              <StringArray count="5">
+                <StringItem index="0" value="Cliente"/>
+                <StringItem index="1" value="Sistema"/>
+                <StringItem index="2" value="Problema"/>
+                <StringItem index="3" value="Solu&#xe7;&#xe3;o"/>
+                <StringItem index="4" value="Funcion&#xe1;rio"/>
               </StringArray>
             </Property>
           </Properties>
@@ -222,6 +225,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextConsulta">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextConsultaKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBtnConsultaAtendimentos">
           <Properties>

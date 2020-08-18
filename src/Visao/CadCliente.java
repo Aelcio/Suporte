@@ -124,6 +124,8 @@ public class CadCliente extends javax.swing.JFrame {
         jTbConsulta = new javax.swing.JTable();
         jTextCodigoPF = new javax.swing.JTextField();
         jTextCodigoPJ = new javax.swing.JTextField();
+        jTextConsultaCliente = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -465,6 +467,14 @@ public class CadCliente extends javax.swing.JFrame {
             }
         });
 
+        jTextConsultaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextConsultaClienteKeyPressed(evt);
+            }
+        });
+
+        jLabel18.setText("Digite um nome para pesquisar");
+
         javax.swing.GroupLayout jPanelCadClienteLayout = new javax.swing.GroupLayout(jPanelCadCliente);
         jPanelCadCliente.setLayout(jPanelCadClienteLayout);
         jPanelCadClienteLayout.setHorizontalGroup(
@@ -567,9 +577,14 @@ public class CadCliente extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanelCadClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanelCadClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCadClienteLayout.setVerticalGroup(
@@ -643,8 +658,12 @@ public class CadCliente extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel17)
                     .addComponent(jTextSenhaSCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -659,7 +678,7 @@ public class CadCliente extends javax.swing.JFrame {
             .addComponent(jPanelCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(831, 496));
+        setSize(new java.awt.Dimension(831, 593));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -818,6 +837,15 @@ public class CadCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextCodigoPJActionPerformed
 
+    private void jTextConsultaClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextConsultaClienteKeyPressed
+        modpessoa.setNome(jTextConsultaCliente.getText());
+        preencher.PreencherJtableGenerico(jTbConsulta,
+                new String[]{"id_pessoa", "nome", "cpf", "cnpj",
+                    "razao_social", "endereco", "numero", "cep",
+                    "id_uf", "telefone", "celular", "email", "cod_sci", "usuario_sci", "senha_sci"},
+                controlpessoa.ConsultaCliente(modpessoa));
+    }//GEN-LAST:event_jTextConsultaClienteKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -870,6 +898,7 @@ public class CadCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -898,6 +927,7 @@ public class CadCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCodigo;
     private javax.swing.JTextField jTextCodigoPF;
     private javax.swing.JTextField jTextCodigoPJ;
+    private javax.swing.JTextField jTextConsultaCliente;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextEndereco;
     private javax.swing.JTextField jTextNome;

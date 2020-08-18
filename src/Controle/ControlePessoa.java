@@ -48,6 +48,50 @@ public class ControlePessoa extends ConexaoPostgres {
         return super.resultset;
     }
 
+    public ResultSet ConsultaCliente(ModeloPessoa pessoa) {
+        super.executeSQL("SELECT "
+                + "cl.id_pessoa, "
+                + "cl.nome, "
+                + "pf.cpf, "
+                + "pj.cnpj, "
+                + "pj.razao_social,"
+                + "cl.endereco, "
+                + "cl.numero, "
+                + "cl.cep, "
+                + "cl.bairro, "
+                + "cd.ds_cidade, "
+                + "uf.id_uf, "
+                + "cl.telefone, "
+                + "cl.celular, "
+                + "cl.email, "
+                + "cl.cod_sci, "
+                + "cl.usuario_sci, "
+                + "cl.senha_sci "
+                + "FROM "
+                + "pessoa as cl "
+                + "JOIN cidade as cd "
+                + "ON cd.id_cidade = cl.id_cidade "
+                + "JOIN uf ON uf.id_uf = cd.id_uf "
+                + "LEFT JOIN pessoa_fisica as pf "
+                + "ON pf.id_pessoa = cl.id_pessoa "
+                + "LEFT JOIN pessoa_juridica as pj "
+                + "ON pj.id_pessoa = cl.id_pessoa "
+                + "WHERE cl.nome ILIKE '%" + pessoa.getNome() 
+                + "%'");
+        return super.resultset;
+    }
+    
+    public ResultSet consultacliente2(ModeloPessoa pessoa){
+        super.executeSQL("SELECT id_pessoa, nome "
+                + "FROM pessoa "
+                + "WHERE "
+                + "nome ILIKE '%" + pessoa.getNome() 
+                + "%'");
+        return super.resultset;
+    }
+    
+  
+
     public void incluir(ModeloPessoa pessoa) {
         pessoa.setId_pessoa(super.ultimasequencia("pessoa", "id_pessoa"));
         sql.delete(0, sql.length());
@@ -81,9 +125,9 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append(pessoa.getCep()).append("')");
         super.atualizarSQL(sql.toString());
     }
-    
-    public void alterar(ModeloPessoa pessoa){
-     sql.delete(0, sql.length());
+
+    public void alterar(ModeloPessoa pessoa) {
+        sql.delete(0, sql.length());
         sql.append("UPDATE pessoa SET ");
         sql.append("nome = '").append(pessoa.getNome()).append("',");
         sql.append("id_cidade = ").append(pessoa.getId_cidade()).append(",");
@@ -104,7 +148,7 @@ public class ControlePessoa extends ConexaoPostgres {
 
     public void retornadados(ModeloPessoa pessoa, ModeloCidade cidade, ModeloPF pf, ModeloPJ pj) {
         super.executeSQL("SELECT * FROM pessoa as p "
-                +"JOIN Cidade as cd "
+                + "JOIN Cidade as cd "
                 + "ON cd.id_cidade = p.id_cidade "
                 + "LEFT JOIN pessoa_fisica as pf "
                 + "ON pf.id_pessoa = p.id_pessoa  "
@@ -125,14 +169,14 @@ public class ControlePessoa extends ConexaoPostgres {
             pessoa.setBairro(resultset.getString("bairro"));
             pessoa.setTelefone(resultset.getString("telefone"));
             pessoa.setCelular(resultset.getString("celular"));
-            pessoa.setEmail(resultset.getString("email")); 
+            pessoa.setEmail(resultset.getString("email"));
             pessoa.setCod_sci((resultset.getInt("cod_sci")));
             pessoa.setUsuario_sci(resultset.getString("usuario_sci"));
             pessoa.setSenha_sci(resultset.getString("senha_sci"));
             pessoa.setId_cidade(resultset.getInt("id_cidade"));
             cidade.setDs_cidade(resultset.getString("ds_cidade"));
             cidade.setId_uf(resultset.getString("id_uf"));
-            
+
         } catch (SQLException ex) {
             System.out.println(ex);
         }

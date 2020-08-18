@@ -3,6 +3,7 @@ package Controle;
 import Dao.ConexaoPostgres;
 import Modelo.ModeloAtendimento;
 import Modelo.ModeloPessoa;
+import Modelo.ModeloSistema;
 import java.sql.ResultSet;
 
 /**
@@ -32,11 +33,11 @@ public class ControleAtendimento extends ConexaoPostgres {
         return super.resultset;
     }   
     
-    public ResultSet consultacliente(ModeloAtendimento atendimento, ModeloPessoa pessoa){
-        super.executeSQL("SELECT at.id_atendimento,"
-                + "p.id_pessoa, "
+    public ResultSet consultacliente(ModeloAtendimento atendimento, ModeloPessoa pessoa, ModeloSistema sistema){
+        super.executeSQL("SELECT at.id_atendimento, "
+                + "p.id_pessoa,"
                 + "p.nome, "
-                + "at.data_suporte, "
+                + "data_suporte, "
                 + "s.id_sistema, "
                 + "s.ds_sistema, "
                 + "at.versao, "
@@ -47,9 +48,10 @@ public class ControleAtendimento extends ConexaoPostgres {
                 + "JOIN pessoa as p "
                 + "ON p.id_pessoa = at.id_pessoa "
                 + "JOIN sistema as s "
-                + "ON s.id_sistema = at.id_sistema"
+                + "ON s.id_sistema = at.id_sistema "
                 + "WHERE "
-                + "p.nome like '%Exatus%'");
+                + "p.nome ILIKE '%" + pessoa.getNome()
+                + "%'");
         return super.resultset;
     }
     
