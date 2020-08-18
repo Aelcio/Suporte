@@ -16,6 +16,7 @@ import Modelo.ModeloCidade;
 import Modelo.ModeloPF;
 import Modelo.ModeloPJ;
 import Modelo.ModeloPessoa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,6 +50,8 @@ public class CadCliente extends javax.swing.JFrame {
         jTextCNPJ.setEnabled(false);
         jTextCPF.setEnabled(false);
         jTextRazaoSocial.setEnabled(false);
+        jTextCodigoPF.setVisible(false);
+        jTextCodigoPJ.setVisible(false);
 
         preencher.FormatarJTable(jTbConsulta, new int[]{60, 200, 85, 110, 200, 200, 60, 60, 30, 80, 90, 200, 60, 100, 60});
         preencher.PreencherJtableGenerico(jTbConsulta,
@@ -119,6 +122,8 @@ public class CadCliente extends javax.swing.JFrame {
         jTextCelular = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbConsulta = new javax.swing.JTable();
+        jTextCodigoPF = new javax.swing.JTextField();
+        jTextCodigoPJ = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -448,6 +453,18 @@ public class CadCliente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTbConsulta);
 
+        jTextCodigoPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCodigoPFActionPerformed(evt);
+            }
+        });
+
+        jTextCodigoPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCodigoPJActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCadClienteLayout = new javax.swing.GroupLayout(jPanelCadCliente);
         jPanelCadCliente.setLayout(jPanelCadClienteLayout);
         jPanelCadClienteLayout.setHorizontalGroup(
@@ -486,18 +503,6 @@ public class CadCliente extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelCadClienteLayout.createSequentialGroup()
                         .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadClienteLayout.createSequentialGroup()
-                                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelCadClienteLayout.createSequentialGroup()
-                                        .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4)))
-                                .addGap(4, 4, 4)
-                                .addComponent(jTextCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCadClienteLayout.createSequentialGroup()
                                 .addComponent(jTextBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)
@@ -537,7 +542,28 @@ public class CadCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextEmail)))
+                                .addComponent(jTextEmail))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadClienteLayout.createSequentialGroup()
+                                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadClienteLayout.createSequentialGroup()
+                                        .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanelCadClienteLayout.createSequentialGroup()
+                                                .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel4)))
+                                        .addGap(4, 4, 4))
+                                    .addGroup(jPanelCadClienteLayout.createSequentialGroup()
+                                        .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(538, 538, 538)))
+                                .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelCadClienteLayout.createSequentialGroup()
+                                        .addComponent(jTextCodigoPF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextCodigoPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanelCadClienteLayout.createSequentialGroup()
                 .addContainerGap()
@@ -557,7 +583,9 @@ public class CadCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextCodigoPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCodigoPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanelCadClienteLayout.createSequentialGroup()
@@ -695,6 +723,7 @@ public class CadCliente extends javax.swing.JFrame {
         estadobotoes(1);
         jTextNome.grabFocus();
         limpar.limparcampos(jPanelCadCliente);
+        estado = Rotinas.INCLUIR;
 
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
@@ -704,32 +733,43 @@ public class CadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
+
         setcompcliente();
-        if(estado == Rotinas.INCLUIR){
-                
-        controlpessoa.incluir(modpessoa);
-        getcompcliente();
+        if (estado == Rotinas.INCLUIR) {
+            if (jTextCodSCI.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Selecione um registro para excluir!");
+            }
+            controlpessoa.incluir(modpessoa);
+            getcompcliente();
 
-        setcomp_pf_pj();
+            setcomp_pf_pj();
 
-        if (jRbPF.isSelected()) {
-            controlpf.incluir(modpf);
-        } else if (jRbPJ.isSelected()) {
-            controlpj.incluir(modpj);
+            if (jRbPF.isSelected()) {
+                controlpf.incluir(modpf);
+            } else if (jRbPJ.isSelected()) {
+                controlpj.incluir(modpj);
+            }
+
+        } else if (estado == Rotinas.ALTERAR) {
+            controlpessoa.alterar(modpessoa);
+            if (jRbPF.isSelected()) {
+                controlpf.alterar(modpf);
+            } else if (jRbPJ.isSelected()) {
+                controlpj.alterar(modpj);
+            }
         }
-        
-            }else if(estado == Rotinas.ALTERAR){
-                controlpessoa.alterar(modpessoa);
-                //if (jRbPF.isSelected()) {
-                    controlpf.alterar(modpf);
-                //} else if (jRbPJ.isSelected()) {
-                    controlpj.alterar(modpj);
-            }               
-        
+
         getcomp_pf_pj();
         estadobotoes(0);
+
+        preencher.FormatarJTable(jTbConsulta, new int[]{60, 200, 85, 110, 200, 200, 60, 60, 30, 80, 90, 200, 60, 100, 60});
+        preencher.PreencherJtableGenerico(jTbConsulta,
+                new String[]{"id_pessoa", "nome", "cpf", "cnpj",
+                    "razao_social", "endereco", "numero", "cep",
+                    "id_uf", "telefone", "celular", "email", "cod_sci", "usuario_sci", "senha_sci"},
+                controlpessoa.consultageral());
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-   // }
+    // }
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -769,6 +809,14 @@ public class CadCliente extends javax.swing.JFrame {
             getcompcliente();
         }
     }//GEN-LAST:event_jTbConsultaMouseClicked
+
+    private void jTextCodigoPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCodigoPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCodigoPFActionPerformed
+
+    private void jTextCodigoPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCodigoPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCodigoPJActionPerformed
 
     /**
      * @param args the command line arguments
@@ -848,6 +896,8 @@ public class CadCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCodCidade;
     private javax.swing.JTextField jTextCodSCI;
     private javax.swing.JTextField jTextCodigo;
+    private javax.swing.JTextField jTextCodigoPF;
+    private javax.swing.JTextField jTextCodigoPJ;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextEndereco;
     private javax.swing.JTextField jTextNome;
@@ -878,7 +928,13 @@ public class CadCliente extends javax.swing.JFrame {
     public void setcompcliente() {
         if (estado == Rotinas.ALTERAR) {
             modpessoa.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+            modpf.setId_pf(Integer.parseInt(jTextCodigoPF.getText()));
+            modpj.setId_pj(Integer.parseInt(jTextCodigoPJ.getText()));
+
         }
+        modpj.setCnpj(jTextCNPJ.getText());
+        modpj.setRazao_social(jTextRazaoSocial.getText());
+        modpf.setCpf(jTextCPF.getText());
         modpessoa.setNome(jTextNome.getText());
         modpessoa.setId_cidade(Integer.parseInt(jTextCodCidade.getText()));
         modpessoa.setTelefone(jTextTelefone.getText());
@@ -894,18 +950,25 @@ public class CadCliente extends javax.swing.JFrame {
     }
 
     public void setcomp_pf_pj() {
-        modpf.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
-        modpj.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
-        modpf.setCpf(jTextCPF.getText());
-        modpf.setCpf(jTextCPF.getText());
-        modpj.setCnpj(jTextCNPJ.getText());
-        modpj.setRazao_social(jTextRazaoSocial.getText());
+        if (estado == Rotinas.ALTERAR) {
+            modpf.setId_pf(Integer.parseInt(jTextCodigoPF.getText()));
+            modpj.setId_pj(Integer.parseInt(jTextCodigoPJ.getText()));
+            modpj.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+        } else if (estado == Rotinas.INCLUIR) {
+            modpf.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+            modpj.setId_pessoa(Integer.parseInt(jTextCodigo.getText()));
+            modpf.setCpf(jTextCPF.getText());
+            modpj.setCnpj(jTextCNPJ.getText());
+            modpj.setRazao_social(jTextRazaoSocial.getText());
+        }
     }
 
     public void getcompcliente() {
         jTextCodigo.setText(Integer.toString(modpessoa.getId_pessoa()));
         jTextNome.setText(modpessoa.getNome());
+        jTextCodigoPF.setText(Integer.toString(modpf.getId_pf()));
         jTextCPF.setText(modpf.getCpf());
+        jTextCodigoPJ.setText(Integer.toString(modpj.getId_pj()));
         jTextCNPJ.setText(modpj.getCnpj());
         jTextCodCidade.setText(Integer.toString(modpessoa.getId_cidade()));
         jTextCidade.setText(modcidade.getDs_cidade());
@@ -923,6 +986,8 @@ public class CadCliente extends javax.swing.JFrame {
     }
 
     public void getcomp_pf_pj() {
+        jTextCodigoPF.setText(Integer.toString(modpf.getId_pf()));
+        jTextCodigoPJ.setText(Integer.toString(modpj.getId_pj()));
         jTextCPF.setText(modpf.getCpf());
         jTextCNPJ.setText(modpj.getCnpj());
         jTextRazaoSocial.setText(modpj.getRazao_social());

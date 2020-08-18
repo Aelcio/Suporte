@@ -92,6 +92,7 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append("email = '").append(pessoa.getEmail()).append("',");
         sql.append("cod_sci = ").append(pessoa.getCod_sci()).append(",");
         sql.append("usuario_sci = '").append(pessoa.getUsuario_sci()).append("',");
+        sql.append("senha_sci = '").append(pessoa.getSenha_sci()).append("',");
         sql.append("endereco = '").append(pessoa.getEndereco()).append("',");
         sql.append("numero = '").append(pessoa.getNumero()).append("',");
         sql.append("bairro = '").append(pessoa.getBairro()).append("',");
@@ -114,7 +115,9 @@ public class ControlePessoa extends ConexaoPostgres {
             super.resultset.first();
             pessoa.setId_pessoa(resultset.getInt("id_pessoa"));
             pessoa.setNome(resultset.getString("nome"));
+            pf.setId_pf(resultset.getInt("id_pf"));
             pf.setCpf(resultset.getString("cpf"));
+            pj.setId_pj(resultset.getInt("id_pj"));
             pj.setCnpj(resultset.getString("cnpj"));
             pessoa.setEndereco(resultset.getString("endereco"));
             pessoa.setNumero(resultset.getString("numero"));

@@ -7,6 +7,7 @@ package Visao;
 
 import Controle.ControleAtendimento;
 import Controle.ControleSistema;
+import Ferramentas.LimparCampos;
 import Ferramentas.PreencherJtableGenerico;
 import Ferramentas.RetornaDataAtual;
 import Modelo.ModeloAtendimento;
@@ -24,6 +25,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     ControleSistema controlsistema = new ControleSistema();
     ControleAtendimento controlatendimento = new ControleAtendimento();
     RetornaDataAtual retdata = new RetornaDataAtual();
+    LimparCampos limpar = new LimparCampos();
 
     ModeloAtendimento modatendimento = new ModeloAtendimento();
 
@@ -35,7 +37,8 @@ public class CadAtendimentos extends javax.swing.JFrame {
      */
     public CadAtendimentos() {
         initComponents();
-
+        jTextCodigo.setEnabled(false);
+        jTextCodCliente.setEnabled(false);
     }
 
     /**
@@ -47,7 +50,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelAtendimento = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -80,8 +83,11 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jTextCodSistema = new javax.swing.JTextField();
         jBtnConsultaSistema = new javax.swing.JButton();
         jBtnConsultaCliente = new javax.swing.JButton();
+        jBtnConsultaAtendimentos = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(java.awt.SystemColor.controlShadow);
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 37));
@@ -105,6 +111,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(100, 37));
 
         jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/IncluirFT.png"))); // NOI18N
+        jBtnNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnNovo.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnNovo.setSelected(true);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -114,10 +121,12 @@ public class CadAtendimentos extends javax.swing.JFrame {
         });
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/AlterarFT.png"))); // NOI18N
+        jBtnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAlterar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnAlterar.setSelected(true);
 
         jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SalvarFT.png"))); // NOI18N
+        jBtnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnSalvar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnSalvar.setPreferredSize(new java.awt.Dimension(27, 27));
         jBtnSalvar.setSelected(true);
@@ -128,10 +137,12 @@ public class CadAtendimentos extends javax.swing.JFrame {
         });
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/DeleteFT.png"))); // NOI18N
+        jBtnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExcluir.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnExcluir.setSelected(true);
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CancelarFT.png"))); // NOI18N
+        jBtnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnCancelar.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnCancelar.setSelected(true);
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +205,9 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jTextProblema.setColumns(20);
         jTextProblema.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextProblema.setRows(5);
+        jTextProblema.setTabSize(0);
         jScrollPane1.setViewportView(jTextProblema);
+        jTextProblema.getAccessibleContext().setAccessibleParent(jPanelAtendimento);
 
         jLabel8.setText("Problema");
 
@@ -202,11 +215,14 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jTextSolucao.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextSolucao.setRows(5);
         jScrollPane2.setViewportView(jTextSolucao);
+        jTextSolucao.getAccessibleContext().setAccessibleDescription("");
+        jTextSolucao.getAccessibleContext().setAccessibleParent(jPanelAtendimento);
 
         jLabel9.setText("Solução");
 
         jBtnConsultaSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
         jBtnConsultaSistema.setContentAreaFilled(false);
+        jBtnConsultaSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnConsultaSistema.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnConsultaSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +232,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
 
         jBtnConsultaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
         jBtnConsultaCliente.setContentAreaFilled(false);
+        jBtnConsultaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnConsultaCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBtnConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,123 +240,145 @@ public class CadAtendimentos extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jBtnConsultaAtendimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
+        jBtnConsultaAtendimentos.setContentAreaFilled(false);
+        jBtnConsultaAtendimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnConsultaAtendimentos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBtnConsultaAtendimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultaAtendimentosActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Consulta Atendimentos");
+
+        javax.swing.GroupLayout jPanelAtendimentoLayout = new javax.swing.GroupLayout(jPanelAtendimento);
+        jPanelAtendimento.setLayout(jPanelAtendimentoLayout);
+        jPanelAtendimentoLayout.setHorizontalGroup(
+            jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel2)
+            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                        .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jBtnConsultaCliente))
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextCodSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jBtnConsultaSistema)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                        .addComponent(jTextCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextCodSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(1, 1, 1)
-                                                .addComponent(jBtnConsultaSistema)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel7))
-                                            .addComponent(jTextCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jBtnConsultaCliente)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(jBtnConsultaAtendimentos)))
                 .addContainerGap())
             .addComponent(jSeparator1)
+            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelAtendimentoLayout.setVerticalGroup(
+            jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3))
                     .addComponent(jBtnConsultaCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextVersao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextCodSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                        .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jBtnConsultaSistema))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 100, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())))
+                        .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jTextVersao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jTextSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextCodSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jBtnConsultaSistema))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 98, Short.MAX_VALUE))
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2)
+                                .addContainerGap())))
+                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                        .addComponent(jBtnConsultaAtendimentos)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
+
+        jLabel11.getAccessibleContext().setAccessibleParent(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(825, 438));
@@ -348,9 +387,15 @@ public class CadAtendimentos extends javax.swing.JFrame {
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         estadobotoes(1);
+        limpar.limparcampos(jPanelAtendimento);
+        jBtnConsultaCliente.grabFocus();
+        jTextProblema.setText("");
+        jTextSolucao.setText("");
+        jTextSistema.setText("");
+        jTextCodSistema.setText("");
+        jTextData.setText("");
+        jTextFuncionario.setText("");
         jTextData.setText(retdata.dataatual());
-        
-
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -358,13 +403,13 @@ public class CadAtendimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        if(jTextCodCliente.getText().equals("") && jTextCliente.getText().equals("")) {
+        if (jTextCodCliente.getText().equals("") && jTextCliente.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe um Cliente! ");
-        }else{
-        setcomp();
-        controlatendimento.incluir(modatendimento);
-        getcomp();
-        estadobotoes(0);
+        } else {
+            setcomp();
+            controlatendimento.incluir(modatendimento);
+            getcomp();
+            estadobotoes(0);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
     }
     private void jBtnConsultaSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaSistemaActionPerformed
@@ -375,7 +420,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 jTextCodSistema.setText(cs.codretorno);
                 jTextSistema.setText(cs.sistemaretorno);
-                
+
                 jTextVersao.grabFocus();
 
             }
@@ -390,12 +435,16 @@ public class CadAtendimentos extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 jTextCodCliente.setText(cc.codretorno);
                 jTextCliente.setText(cc.clienteretorno);
-                
+
                 jTextData.grabFocus();
 
             }
         });
     }//GEN-LAST:event_jBtnConsultaClienteActionPerformed
+
+    private void jBtnConsultaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaAtendimentosActionPerformed
+        new ConsultaAtendimentos().setVisible(true);
+    }//GEN-LAST:event_jBtnConsultaAtendimentosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,6 +485,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAlterar;
     private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnConsultaAtendimentos;
     private javax.swing.JButton jBtnConsultaCliente;
     private javax.swing.JButton jBtnConsultaSistema;
     private javax.swing.JButton jBtnExcluir;
@@ -443,6 +493,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     private javax.swing.JButton jBtnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -451,9 +502,9 @@ public class CadAtendimentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanelAtendimento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -488,7 +539,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
     public void setcomp() {
         modatendimento.setId_pessoa(Integer.parseInt(jTextCodCliente.getText()));
         modatendimento.setData_suporte(jTextData.getText());
-        modatendimento.setId_sistema(Integer.parseInt(jTextSistema.getText()));
+        modatendimento.setId_sistema(Integer.parseInt(jTextCodSistema.getText()));
         modatendimento.setVersao(jTextVersao.getText());
         modatendimento.setFuncionario(jTextFuncionario.getText());
         modatendimento.setProblema(jTextProblema.getText());

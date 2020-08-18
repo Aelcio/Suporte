@@ -2,6 +2,7 @@ package Controle;
 
 import Dao.ConexaoPostgres;
 import Modelo.ModeloAtendimento;
+import Modelo.ModeloPessoa;
 import java.sql.ResultSet;
 
 /**
@@ -29,6 +30,27 @@ public class ControleAtendimento extends ConexaoPostgres {
                 + "JOIN sistema as s "
                 + "ON s.id_sistema = at.id_sistema");
         return super.resultset;
+    }   
+    
+    public ResultSet consultacliente(ModeloPessoa pessoa){
+        super.executeSQL("SELECT at.id_atendimento,"
+                + "c.id_pessoa,"
+                + "c.nome,"
+                + "at.data_suporte,"
+                + "s.id_sistema,"
+                + "s.ds_sistema,"
+                + "at.versao,"
+                + "at.funcionario,"
+                + "at.problema,"
+                + "at.solucao,"
+                + "FROM atendimento as at,"
+                + "JOIN pessoa as c	"
+                + "ON c.id_pessoa = at.id_pessoa "
+                + "JOIN sistema as s"
+                + "ON s.id_sistema = at.id_sistema"
+                + "WHERE"
+                + "c.nome like '%"+pessoa.getNome()+"%'");
+        return super.resultset;
     }
     
     public void incluir(ModeloAtendimento atendimento) {
@@ -38,20 +60,21 @@ public class ControleAtendimento extends ConexaoPostgres {
         sql.append("id_atendimento,");
         sql.append("id_pessoa,");
         sql.append("data_suporte,");
-        sql.append("id_sistema,");
         sql.append("versao,");
         sql.append("funcionario,");
         sql.append("problema,");
-        sql.append("solucao");
+        sql.append("solucao,");
+        sql.append("id_sistema");
         sql.append(")VALUES(");
         sql.append(atendimento.getId_atendimento()).append(",");
         sql.append(atendimento.getId_pessoa()).append(",'");
         sql.append(atendimento.getData_suporte()).append("','");
-        sql.append(atendimento.getId_sistema()).append("','");
         sql.append(atendimento.getVersao()).append("','");
         sql.append(atendimento.getFuncionario()).append("','");
         sql.append(atendimento.getProblema()).append("','");
-        sql.append(atendimento.getSolucao()).append("')");        
+        sql.append(atendimento.getSolucao()).append("',"); 
+        sql.append(atendimento.getId_sistema()).append(" )");
+        
         super.atualizarSQL(sql.toString());        
     }    
 }

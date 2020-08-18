@@ -18,9 +18,10 @@ public class LimparCampos {
                 JFormattedTextField field = (JFormattedTextField) component;
                 field.setValue(null);
                 field.setText("");
-            }else if (component instanceof JTextField){
+            } else if (component instanceof JTextField) {
                 JTextField field = (JTextField) component;
                 field.setText("");
+
             }
         }
     }

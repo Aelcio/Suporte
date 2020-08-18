@@ -7,6 +7,7 @@ package Visao;
 
 import Controle.ControleAtendimento;
 import Ferramentas.PreencherJtableGenerico;
+import Modelo.ModeloPessoa;
 
 /**
  *
@@ -16,6 +17,7 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
 
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
     private ControleAtendimento controlatendimento = new ControleAtendimento();
+    ModeloPessoa modpessoa = new ModeloPessoa();
 
     /**
      * Creates new form ConsultaAtendimentos
@@ -23,9 +25,9 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
     public ConsultaAtendimentos() {
         initComponents();
 
-        preencher.FormatarJTable(jTable2, new int[]{50, 60, 200,65,80,100,80,80,1000,1000});
+        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
 
-        preencher.PreencherJtableGenerico(jTable2, new String[]{"id_atendimento",
+        preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
             "id_pessoa",
             "nome",
             "data_suporte",
@@ -36,6 +38,28 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
             "problema",
             "solucao"},
                 controlatendimento.consultageral());
+    }
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
+
+        switch (jCbTipo.getSelectedIndex()) {
+            case 0: {
+                modpessoa.setNome(jTextConsulta.getText());
+                preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
+                    "id_pessoa",
+                    "nome",
+                    "data_suporte",
+                    "id_sistema",
+                    "ds_sistema",
+                    "versao",
+                    "funcionario",
+                    "problema",
+                    "solucao"},
+                        controlatendimento.consultacliente(modpessoa));
+                break;
+            }
+        }
     }
 
     /**
@@ -49,14 +73,21 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTbConsulta = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jCbTipo = new javax.swing.JComboBox<>();
+        jTextConsulta = new javax.swing.JTextField();
+        jBtnConsultaAtendimentos = new javax.swing.JButton();
+        jBtnConsultaAtendimentos1 = new javax.swing.JButton();
+        jBtnBuscar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -75,8 +106,8 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane2.setViewportView(jTable2);
+        jTbConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(jTbConsulta);
 
         jPanel5.setBackground(java.awt.SystemColor.controlShadow);
         jPanel5.setPreferredSize(new java.awt.Dimension(206, 41));
@@ -106,11 +137,34 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
             .addGap(0, 41, Short.MAX_VALUE)
         );
 
+        jCbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Geral", "Cliente", "Sistema", "Problema", "Solução", "Funcionário" }));
+
+        jBtnConsultaAtendimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
+        jBtnConsultaAtendimentos.setContentAreaFilled(false);
+        jBtnConsultaAtendimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnConsultaAtendimentos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBtnConsultaAtendimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultaAtendimentosActionPerformed(evt);
+            }
+        });
+
+        jBtnConsultaAtendimentos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
+        jBtnConsultaAtendimentos1.setContentAreaFilled(false);
+        jBtnConsultaAtendimentos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBtnConsultaAtendimentos1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+
+        jBtnBuscar.setText("Buscar");
+
+        jLabel1.setText("Tipo de busca");
+
+        jLabel2.setText("Texto para pesquisa");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -119,7 +173,29 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
-                        .addGap(4, 4, 4))))
+                        .addGap(4, 4, 4))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jTextConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnBuscar))
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(373, 373, 373)
+                    .addComponent(jBtnConsultaAtendimentos)
+                    .addContainerGap(374, Short.MAX_VALUE)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jBtnConsultaAtendimentos1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,8 +204,27 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(205, 205, 205)
+                    .addComponent(jBtnConsultaAtendimentos)
+                    .addContainerGap(206, Short.MAX_VALUE)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jBtnConsultaAtendimentos1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,6 +243,10 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(784, 473));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnConsultaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaAtendimentosActionPerformed
+        new ConsultaAtendimentos().setVisible(true);
+    }//GEN-LAST:event_jBtnConsultaAtendimentosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,10 +284,17 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnBuscar;
+    private javax.swing.JButton jBtnConsultaAtendimentos;
+    private javax.swing.JButton jBtnConsultaAtendimentos1;
+    private javax.swing.JComboBox<String> jCbTipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTbConsulta;
+    private javax.swing.JTextField jTextConsulta;
     // End of variables declaration//GEN-END:variables
 }
