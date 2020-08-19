@@ -443,7 +443,26 @@ public class CadAtendimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnConsultaClienteActionPerformed
 
     private void jBtnConsultaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaAtendimentosActionPerformed
-        new ConsultaAtendimentos().setVisible(true);
+       final ConsultaAtendimentos ca = new ConsultaAtendimentos(this, true);
+        ca.setVisible(true);
+        ca.addWindowListener(new java.awt.event.WindowAdapter() {
+
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jTextCodigo.setText(ca.codretorno);
+                jTextCodCliente.setText(ca.codclienteretorno);
+                jTextCliente.setText(ca.clienteretorno);
+                jTextData.setText(ca.dataretorno);
+                jTextCodSistema.setText(ca.codsistemaretorno);
+                jTextSistema.setText(ca.sistemaretorno);
+                jTextVersao.setText(ca.versaoretorno);
+                jTextFuncionario.setText(ca.funcionarioretorno);
+                jTextProblema.setText(ca.problemaretorno);
+                jTextSolucao.setText(ca.solucaoretorno);
+
+                jTextData.grabFocus();
+
+            }
+        });
     }//GEN-LAST:event_jBtnConsultaAtendimentosActionPerformed
 
     /**

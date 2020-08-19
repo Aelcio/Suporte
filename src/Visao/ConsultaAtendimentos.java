@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Visao;
 
 import Controle.ControleAtendimento;
@@ -15,7 +10,7 @@ import Modelo.ModeloSistema;
  *
  * @author Maru
  */
-public class ConsultaAtendimentos extends javax.swing.JFrame {
+public class ConsultaAtendimentos extends javax.swing.JDialog {
 
     private PreencherJtableGenerico preencher = new PreencherJtableGenerico();
     private ControleAtendimento controlatendimento = new ControleAtendimento();
@@ -23,10 +18,21 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
     ModeloAtendimento modatendimento = new ModeloAtendimento();
     ModeloSistema modsistema = new ModeloSistema();
 
+    public String codretorno = "";
+    public String codclienteretorno = "";
+    public String clienteretorno = "";
+    public String dataretorno = "";
+    public String codsistemaretorno = "";
+    public String sistemaretorno = "";
+    public String versaoretorno = "";
+    public String funcionarioretorno = "";
+    public String problemaretorno = "";
+    public String solucaoretorno = "";
+
     /**
      * Creates new form ConsultaAtendimentos
      */
-    public ConsultaAtendimentos() {
+    public ConsultaAtendimentos(java.awt.Frame parent, boolean modal) {
         initComponents();
 
         preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
@@ -60,8 +66,6 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jCbTipo = new javax.swing.JComboBox<>();
         jTextConsulta = new javax.swing.JTextField();
-        jBtnConsultaAtendimentos = new javax.swing.JButton();
-        jBtnConsultaAtendimentos1 = new javax.swing.JButton();
         jBtnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -89,6 +93,11 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
             }
         });
         jTbConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTbConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbConsultaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTbConsulta);
 
         jPanel5.setBackground(java.awt.SystemColor.controlShadow);
@@ -126,21 +135,6 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                 jTextConsultaKeyPressed(evt);
             }
         });
-
-        jBtnConsultaAtendimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
-        jBtnConsultaAtendimentos.setContentAreaFilled(false);
-        jBtnConsultaAtendimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBtnConsultaAtendimentos.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jBtnConsultaAtendimentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnConsultaAtendimentosActionPerformed(evt);
-            }
-        });
-
-        jBtnConsultaAtendimentos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Lupinha.png"))); // NOI18N
-        jBtnConsultaAtendimentos1.setContentAreaFilled(false);
-        jBtnConsultaAtendimentos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBtnConsultaAtendimentos1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         jBtnBuscar.setText("Buscar");
         jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,16 +175,6 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                                         .addComponent(jBtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE))
                         .addGap(4, 4, 4))))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(373, 373, 373)
-                    .addComponent(jBtnConsultaAtendimentos)
-                    .addContainerGap(374, Short.MAX_VALUE)))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jBtnConsultaAtendimentos1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,16 +194,6 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
                     .addComponent(jBtnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(205, 205, 205)
-                    .addComponent(jBtnConsultaAtendimentos)
-                    .addContainerGap(206, Short.MAX_VALUE)))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jBtnConsultaAtendimentos1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -239,16 +213,13 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnConsultaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaAtendimentosActionPerformed
-        new ConsultaAtendimentos().setVisible(true);
-    }//GEN-LAST:event_jBtnConsultaAtendimentosActionPerformed
-
     private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
         preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
 
         switch (jCbTipo.getSelectedIndex()) {
             case 0: {
-                modpessoa.setNome(jTextConsulta.getText());
+
+                modsistema.setDs_sistema(jTextConsulta.getText());
                 preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
                     "id_pessoa",
                     "nome",
@@ -271,6 +242,11 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         switch (jCbTipo.getSelectedIndex()) {
             case 0: {
                 modpessoa.setNome(jTextConsulta.getText());
+                modsistema.setDs_sistema(jTextConsulta.getText());
+                modatendimento.setProblema(jTextConsulta.getText());
+                modatendimento.setSolucao(jTextConsulta.getText());
+                modatendimento.setData_suporte(jTextConsulta.getText());
+                modatendimento.setFuncionario(jTextConsulta.getText());
                 preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
                     "id_pessoa",
                     "nome",
@@ -286,6 +262,24 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTextConsultaKeyPressed
+
+    private void jTbConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbConsultaMouseClicked
+        int index = jTbConsulta.getSelectedRow();
+        codretorno = (String) jTbConsulta.getValueAt(index, 0);
+        codclienteretorno = (String) jTbConsulta.getValueAt(index, 1);
+        clienteretorno = (String) jTbConsulta.getValueAt(index, 2);
+        dataretorno = (String) jTbConsulta.getValueAt(index, 3);
+        codsistemaretorno = (String) jTbConsulta.getValueAt(index, 4);
+        sistemaretorno = (String) jTbConsulta.getValueAt(index, 5);
+        versaoretorno = (String) jTbConsulta.getValueAt(index, 6);
+        funcionarioretorno = (String) jTbConsulta.getValueAt(index, 7);
+        problemaretorno = (String) jTbConsulta.getValueAt(index, 8);
+        solucaoretorno = (String) jTbConsulta.getValueAt(index, 9);
+        
+        if (evt.getClickCount() == 2) {
+            dispose();
+        }
+    }//GEN-LAST:event_jTbConsultaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,15 +311,13 @@ public class ConsultaAtendimentos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaAtendimentos().setVisible(true);
+                //new ConsultaAtendimentos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnBuscar;
-    private javax.swing.JButton jBtnConsultaAtendimentos;
-    private javax.swing.JButton jBtnConsultaAtendimentos1;
     private javax.swing.JComboBox<String> jCbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
