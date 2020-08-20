@@ -19,6 +19,7 @@ public class ModeloPessoa {
     public String numero;
     public String bairro;
     public String cep;
+    public String serial_sgbr;
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -123,6 +124,13 @@ public class ModeloPessoa {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    
-    
+
+    public String getSerial_sgbr() {
+        return serial_sgbr;
+    }
+
+    public void setSerial_sgbr(String serial_sgbr) {
+        this.serial_sgbr = serial_sgbr;
+    }
+
 }

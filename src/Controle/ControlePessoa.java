@@ -34,7 +34,8 @@ public class ControlePessoa extends ConexaoPostgres {
                 + "cl.email, "
                 + "cl.cod_sci, "
                 + "cl.usuario_sci, "
-                + "cl.senha_sci "
+                + "cl.senha_sci, "
+                + "cl.serial_sgbr "
                 + "FROM "
                 + "pessoa as cl "
                 + "JOIN cidade as cd "
@@ -66,7 +67,8 @@ public class ControlePessoa extends ConexaoPostgres {
                 + "cl.email, "
                 + "cl.cod_sci, "
                 + "cl.usuario_sci, "
-                + "cl.senha_sci "
+                + "cl.senha_sci, "
+                + "cl.serial_sgbr "
                 + "FROM "
                 + "pessoa as cl "
                 + "JOIN cidade as cd "
@@ -76,21 +78,19 @@ public class ControlePessoa extends ConexaoPostgres {
                 + "ON pf.id_pessoa = cl.id_pessoa "
                 + "LEFT JOIN pessoa_juridica as pj "
                 + "ON pj.id_pessoa = cl.id_pessoa "
-                + "WHERE cl.nome ILIKE '%" + pessoa.getNome() 
+                + "WHERE cl.nome ILIKE '%" + pessoa.getNome()
                 + "%'");
         return super.resultset;
     }
-    
-    public ResultSet consultacliente2(ModeloPessoa pessoa){
+
+    public ResultSet consultacliente2(ModeloPessoa pessoa) {
         super.executeSQL("SELECT id_pessoa, nome "
                 + "FROM pessoa "
                 + "WHERE "
-                + "nome ILIKE '%" + pessoa.getNome() 
+                + "nome ILIKE '%" + pessoa.getNome()
                 + "%'");
         return super.resultset;
     }
-    
-  
 
     public void incluir(ModeloPessoa pessoa) {
         pessoa.setId_pessoa(super.ultimasequencia("pessoa", "id_pessoa"));
@@ -108,7 +108,8 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append("endereco,");
         sql.append("numero,");
         sql.append("bairro,");
-        sql.append("CEP");
+        sql.append("CEP,");
+        sql.append("serial_sgbr");
         sql.append(")VALUES(");
         sql.append(pessoa.getId_pessoa()).append(",'");
         sql.append(pessoa.getNome()).append("',");
@@ -122,7 +123,8 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append(pessoa.getEndereco()).append("','");
         sql.append(pessoa.getNumero()).append("','");
         sql.append(pessoa.getBairro()).append("','");
-        sql.append(pessoa.getCep()).append("')");
+        sql.append(pessoa.getCep()).append("','");
+        sql.append(pessoa.getSerial_sgbr()).append("')");
         super.atualizarSQL(sql.toString());
     }
 
@@ -140,7 +142,8 @@ public class ControlePessoa extends ConexaoPostgres {
         sql.append("endereco = '").append(pessoa.getEndereco()).append("',");
         sql.append("numero = '").append(pessoa.getNumero()).append("',");
         sql.append("bairro = '").append(pessoa.getBairro()).append("',");
-        sql.append("cep = '").append(pessoa.getCep()).append("'");
+        sql.append("cep = '").append(pessoa.getCep()).append("','");
+        sql.append("serial_sgbr = '").append(pessoa.getSerial_sgbr()).append("'");
         sql.append("WHERE ");
         sql.append("id_pessoa = ").append(pessoa.getId_pessoa());
         super.atualizarSQL(sql.toString());
@@ -173,6 +176,7 @@ public class ControlePessoa extends ConexaoPostgres {
             pessoa.setCod_sci((resultset.getInt("cod_sci")));
             pessoa.setUsuario_sci(resultset.getString("usuario_sci"));
             pessoa.setSenha_sci(resultset.getString("senha_sci"));
+            pessoa.setSerial_sgbr(resultset.getString("serial_sgbr"));
             pessoa.setId_cidade(resultset.getInt("id_cidade"));
             cidade.setDs_cidade(resultset.getString("ds_cidade"));
             cidade.setId_uf(resultset.getString("id_uf"));
