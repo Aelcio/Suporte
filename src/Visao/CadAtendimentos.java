@@ -85,6 +85,8 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jBtnConsultaCliente = new javax.swing.JButton();
         jBtnConsultaAtendimentos = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -252,6 +254,10 @@ public class CadAtendimentos extends javax.swing.JFrame {
 
         jLabel11.setText("Consulta Atendimentos");
 
+        jLabel12.setText("Solução");
+
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Finalizado", "Pendente", "Aguardando Backup", "Outros" }));
+
         javax.swing.GroupLayout jPanelAtendimentoLayout = new javax.swing.GroupLayout(jPanelAtendimento);
         jPanelAtendimento.setLayout(jPanelAtendimentoLayout);
         jPanelAtendimentoLayout.setHorizontalGroup(
@@ -260,9 +266,17 @@ public class CadAtendimentos extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
+            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
@@ -302,15 +316,11 @@ public class CadAtendimentos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFuncionario)))
+                                .addComponent(jTextFuncionario))
+                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
-            .addComponent(jSeparator1)
-            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAtendimentoLayout.setVerticalGroup(
             jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,6 +340,12 @@ public class CadAtendimentos extends javax.swing.JFrame {
                     .addComponent(jBtnConsultaCliente))
                 .addGap(7, 7, 7)
                 .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
+                        .addComponent(jBtnConsultaAtendimentos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                        .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
                         .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,15 +373,9 @@ public class CadAtendimentos extends javax.swing.JFrame {
                             .addComponent(jBtnConsultaSistema))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 98, Short.MAX_VALUE))
-                            .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2)
-                                .addContainerGap())))
-                    .addGroup(jPanelAtendimentoLayout.createSequentialGroup()
-                        .addComponent(jBtnConsultaAtendimentos)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel9)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -379,7 +389,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
             .addComponent(jPanelAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(825, 438));
+        setSize(new java.awt.Dimension(825, 467));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -456,7 +466,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
                 jTextFuncionario.setText(ca.funcionarioretorno);
                 jTextProblema.setText(ca.problemaretorno);
                 jTextSolucao.setText(ca.solucaoretorno);
-
+                jComboBoxStatus.setSelectedItem(ca.statusretorno);
                 jTextData.grabFocus();
 
             }
@@ -508,9 +518,11 @@ public class CadAtendimentos extends javax.swing.JFrame {
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnNovo;
     private javax.swing.JButton jBtnSalvar;
+    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -561,6 +573,7 @@ public class CadAtendimentos extends javax.swing.JFrame {
         modatendimento.setFuncionario(jTextFuncionario.getText());
         modatendimento.setProblema(jTextProblema.getText());
         modatendimento.setSolucao(jTextSolucao.getText());
+        modatendimento.setStatus(jComboBoxStatus.getSelectedItem().toString());
     }
 
     public void getcomp() {
@@ -573,5 +586,6 @@ public class CadAtendimentos extends javax.swing.JFrame {
         jTextFuncionario.setText(modatendimento.getFuncionario());
         jTextProblema.setText(modatendimento.getProblema());
         jTextSolucao.setText(modatendimento.getSolucao());
+        jComboBoxStatus.setSelectedItem(modatendimento.getStatus());        
     }
 }

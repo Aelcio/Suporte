@@ -16,6 +16,7 @@ public class ModeloAtendimento {
     private String funcionario;
     private String problema;
     private String solucao;
+    private String status;
 
     public int getId_atendimento() {
         return id_atendimento;
@@ -81,4 +82,13 @@ public class ModeloAtendimento {
         this.solucao = solucao;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 }

@@ -24,7 +24,8 @@ public class ControleAtendimento extends ConexaoPostgres {
                 + "at.versao, "
                 + "at.funcionario, "
                 + "at.problema, "
-                + "at.solucao "
+                + "at.solucao, " 
+                + "at.status "                
                 + "FROM atendimento as at "
                 + "JOIN pessoa as p "
                 + "ON p.id_pessoa = at.id_pessoa "
@@ -43,7 +44,8 @@ public class ControleAtendimento extends ConexaoPostgres {
                 + "at.versao, "
                 + "at.funcionario, "
                 + "at.problema, "
-                + "at.solucao "
+                + "at.solucao, "
+                + "at.status " 
                 + "FROM atendimento as at "
                 + "JOIN pessoa as p "
                 + "ON p.id_pessoa = at.id_pessoa "
@@ -56,6 +58,7 @@ public class ControleAtendimento extends ConexaoPostgres {
                 + "%' OR at.solucao ILIKE '%" + atendimento.getSolucao()
                 + "%' OR at.solucao ILIKE '%" + atendimento.getSolucao()
                 + "%' OR at.funcionario ILIKE '%" + atendimento.getFuncionario()
+                + "%' OR at.status ILIKE '%" + atendimento.getStatus()
                 + "%'");
         return super.resultset;
     }
@@ -71,7 +74,8 @@ public class ControleAtendimento extends ConexaoPostgres {
         sql.append("funcionario,");
         sql.append("problema,");
         sql.append("solucao,");
-        sql.append("id_sistema");
+        sql.append("status, ");
+        sql.append("id_sistema ");
         sql.append(")VALUES(");
         sql.append(atendimento.getId_atendimento()).append(",");
         sql.append(atendimento.getId_pessoa()).append(",'");
@@ -79,7 +83,8 @@ public class ControleAtendimento extends ConexaoPostgres {
         sql.append(atendimento.getVersao()).append("','");
         sql.append(atendimento.getFuncionario()).append("','");
         sql.append(atendimento.getProblema()).append("','");
-        sql.append(atendimento.getSolucao()).append("',");
+        sql.append(atendimento.getSolucao()).append("','");
+        sql.append(atendimento.getStatus()).append("', ");
         sql.append(atendimento.getId_sistema()).append(" )");
 
         super.atualizarSQL(sql.toString());

@@ -28,6 +28,7 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
     public String funcionarioretorno = "";
     public String problemaretorno = "";
     public String solucaoretorno = "";
+    public String statusretorno = "";
 
     /**
      * Creates new form ConsultaAtendimentos
@@ -35,7 +36,7 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
     public ConsultaAtendimentos(java.awt.Frame parent, boolean modal) {
         initComponents();
 
-        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
+        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000, 80});
 
         preencher.PreencherJtableGenerico(jTbConsulta, new String[]{"id_atendimento",
             "id_pessoa",
@@ -46,7 +47,8 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
             "versao",
             "funcionario",
             "problema",
-            "solucao"},
+            "solucao", 
+            "status"},
                 controlatendimento.consultageral());
     }
 
@@ -73,17 +75,17 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
 
         jTbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Cod. Cliente", "Cliente", "Data", "Cod. Sistema", "Sistema", "Versão", "Funcionário", "Problema", "Solução"
+                "Código", "Cod. Cliente", "Cliente", "Data", "Cod. Sistema", "Sistema", "Versão", "Funcionário", "Problema", "Solução", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -193,7 +195,7 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextConsultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextConsultaKeyPressed
-        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000});
+        preencher.FormatarJTable(jTbConsulta, new int[]{50, 60, 200, 65, 80, 100, 80, 80, 1000, 1000, 80});
 
         modpessoa.setNome(jTextConsulta.getText());
         modsistema.setDs_sistema(jTextConsulta.getText());
@@ -210,7 +212,8 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
             "versao",
             "funcionario",
             "problema",
-            "solucao"},
+            "solucao",
+            "status"},
                 controlatendimento.consultacliente(modatendimento, modpessoa, modsistema));
     }//GEN-LAST:event_jTextConsultaKeyPressed
 
@@ -226,6 +229,7 @@ public class ConsultaAtendimentos extends javax.swing.JDialog {
         funcionarioretorno = (String) jTbConsulta.getValueAt(index, 7);
         problemaretorno = (String) jTbConsulta.getValueAt(index, 8);
         solucaoretorno = (String) jTbConsulta.getValueAt(index, 9);
+        statusretorno = (String) jTbConsulta.getValueAt(index, 10);
 
         if (evt.getClickCount() == 2) {
             dispose();
